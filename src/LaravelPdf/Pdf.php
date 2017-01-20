@@ -89,6 +89,24 @@ class Pdf {
 		$this->mpdf->showWatermarkImage = true;
 		return $this->mpdf->SetWatermarkImage($src, $alpha, $size, $position);
 	}
+	public function setOrientacao($orientation){
+        $this->orientation = $orientation;
+
+        $this->mpdf = new mPDF(
+			$this->getConfig('mode'),              // mode - default ''
+			$this->getConfig('format'),            // format - A4, for example, default ''
+			$this->getConfig('default_font_size'), // font size - default 0
+			$this->getConfig('default_font'),      // default font family
+			$this->getConfig('margin_left'),       // margin_left
+			$this->getConfig('margin_right'),      // margin right
+			$this->getConfig('margin_top'),        // margin top
+			$this->getConfig('margin_bottom'),     // margin bottom
+			$this->getConfig('margin_header'),     // margin header
+			$this->getConfig('margin_footer'),     // margin footer
+			$orientation       // L - landscape, P - portrait
+	);
+        return $this;
+    }
 
 	/**
 	 * Sets a watermark text for the PDF
